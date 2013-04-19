@@ -35,7 +35,7 @@ module Flowchef
     
     def report
       msg = <<-eos 
-             <h2>Chef failuers on #{node.name}</h2>
+             <h2>Chef failures on #{node.name}</h2>
              #{run_status.formatted_exception}
             eos
       flow = Flowdock::Flow.new(:api_token => @api_token,
@@ -44,7 +44,7 @@ module Flowchef
                                   :address => "noreply@#{node.fqdn}"})
       flow.push_to_team_inbox(:subject => "Chef failuers on #{node.name}",
                               :content => msg,
-                              :tags => @tags)
+                              :tags => [])
     end
 
     def blank?(var)
